@@ -1,5 +1,5 @@
 ---UNIX Sockets--- This project was already started here-->> https://github.com/Geek-Research-Lab/Operating-Systems/tree/UNIX And the project just got stopped in the middle due to some tiny discouragments in learning and coding... Now, i am back to continue here... So, refer the previous one too... Plus, this isn't purely my own thingy, a mix of existing stuffs are added. We can't propose something and implement something innovative unless learning what our senior genius buddies have done. Afterall, it isn't that easy to propose new technology since too many technologies have come up! Every second, we get updates.<br>
-Since i am a woman, i talk a lot. Sorry for that! Anyways, Before going to this actual UNIX awesome thingy, here are some of my previous repositories too:- Check out if interested! <br>
+Since i am a woman, i talk a lot. Sorry for that! Anyways, Before going to this actual UNIX awesome thingy, here are some of my previous repositories related to this project:- Check out if interested! <br>
 --- WinSock ---> https://github.com/Geek-Research-Lab/WindowsSockets <br>
 --- Win-UNIX sockets ---> https://github.com/Geek-Research-Lab/Win-UNIX-Sockets <br>
 --- Basic Java sockets ---> https://github.com/dragonwolverines/SocketProgramming <br>
