@@ -1,0 +1,18 @@
+/*---------------- wrapper functions ---------------------*/
+/*---1---Wrapper Sock------*/
+int socket(int family, int type, int protocol)
+{
+int n;
+if((n=socket(family, type, protocol)) < 0)
+err_sys("socket error");
+return(n);
+}
+/*---2---Wrapper thread-----*/
+void Pthread_mutex_lock(pthread_mutex_t *mptr)
+{
+int n;
+if((n = pthread_mutex_lock(mptr)) == 0)
+return;
+errno = n;
+err_sys("pthread_mutex_lock error");
+}
