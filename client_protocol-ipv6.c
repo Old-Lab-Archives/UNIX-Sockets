@@ -1,7 +1,7 @@
 /* This is "Protocol Independence" program using IPv6 for client protocol.
 Like if you refer here---> https://github.com/Geek-Research-Lab/Operating-Systems/blob/UNIX/simple_client.cpp ---This is protocol dependent.
 Protocol dependent concepts are used in IPv4. */
-/*So, it is cool to make a program as a protocol independent rather than dependent one... So, let's go here with IPv6 for client protocol */
+/*--So, it is cool to make a program as a protocol independent rather than dependent one... So, let's go here with IPv6 for client protocol-- */
 #include "meow.h"
 int main(int argc, char **argv)
 {
