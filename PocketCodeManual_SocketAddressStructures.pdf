@@ -1,0 +1,72 @@
+                                SOCKET ADDRESS STRUCTURES (Short Code manual on IPv4 and IPv6)
+						                                                      Twitter: Follow @ashumeow
+/* -----IPv4 Socket Address Strucutre:- -----*/
+struct in_addr
+{
+in_addr_t s_addr; 	/* 32-bit IPv4 address*/
+};			/*network byte ordered*/
+struct sockaddr_in
+{
+uint8_t sin_len;		/*length of structure (16)*/
+sa_family_t sin_family; /*AF_INET*/
+in_port_t sin_port;	/*16 bit TCP or UDP port number*/
+			/*network byte ordered*/
+struct in_addr sin_addr; /*32-bit IPv4 address*/
+			/*network byte ordered*/
+char sin_zero[8];	/*unused*/
+};
+
+/*---- Datatypes required by the POSIX specification-----*/
+1. int8_t		----- Signed 8-bit integer		----- <sys/types.h>
+2. uint8_t		----- unsigned 8-bit integer	----- <sys/types.h>
+3. int16_t		----- signed 16-bit integer	----- <sys/types.h>
+4. uint16_t		----- unsigned 16-bit integer	----- <sys/types.h>
+5. int32_t		----- signed 32-bit integer	----- <sys/types.h>
+6. uint32_t		----- unsigned 32-bit integer	----- <sys/types.h>
+7. sa_family_t	----- family of socket address structure ----- <sys/socket.h>
+8. socklen_t	----- length of socket address structure 	----- <sys/socket.h>
+9. in_addr_t	----- IPv4 address (uint32_t)		----- <netinet/in.h>
+10. in_port_t	----- TCP or UDP port (uint16_t)		----- <netinet/in.h>
+
+/*---- Generic socket address ----*/
+struct sockaddr
+{
+uint8_t sa_len;
+sa_family_t sa_family;		/*address family: AF_xxx value*/
+char sa_data[14];		/*protocol specific address*/
+};
+
+/*------- IPv6 socket address structure -------*/
+struct in6_addr
+{
+uint8_t s6_addr[16];		/*128 bit IPv6 address*/
+				/*network byte ordered*/
+};
+#define SIN6_LEN		/*required for compile time tests*/
+struct sockaddr_in6
+{
+uint8_t sin6_len;		/*length of this struct (28)*/
+sa_family_t sin6_family;	/* AF_INET6 */
+in_port_t sin6_port;		/*transport layer port*/
+				/*network byte ordered*/
+uint32_t sin6_flowinfo;		/*flow information, undefined*/
+struct in6_addr sin6_addr;	/* IPv6 address*/
+				/*network byte ordered*/
+uint32_t sin6_scope_id;		/*set of interfaces for a scope*/
+};
+
+/*----- Short notes on IPv6 socket address structure-----*/
+--->> The SIN6_LEN constant must be defined only if the system supports the length member for socket address structure.
+--->> The IPv6 family is AF_INET6, whereas the IPv4 family is AF_INET.
+--->> The sockaddr_in6 is 64-bit aligned and sin6_addr is 128 bit. In some processors, the data accesses of 64 bit values are optimized if it's stored on a 64-bit boundary.
+--->> The sin6_flowinfo is divided into (i) Low order 20 bits which are the flow label. (ii) The high order 12 bits which are reserved.
+--->> The sin6_scope_id identifies the scope zone where it is most commonly used as an interface index for a link local address.
+
+/*------- New Generic Socket Address Structure -------*/
+struct sockaddr_storage
+{
+uint8_t ss_len;		/*struct length*/
+sa_family_t ss_family;	/*address family: AF_xxx value*/
+};
+
+/*--------------------------------------------------------------------------------*/
