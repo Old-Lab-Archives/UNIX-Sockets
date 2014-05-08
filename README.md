@@ -4,7 +4,9 @@ Since i am a woman, i talk a lot. Sorry for that! Anyways, Before going to this 
 --- Win-UNIX sockets ---> https://github.com/Geek-Research-Lab/Win-UNIX-Sockets <br>
 --- Basic Java sockets ---> https://github.com/dragonwolverines/SocketProgramming <br>
 --- Basic Java dynamic multicasting (beginner type) ---> https://github.com/dragonwolverines/DynamicMulticasting-Using-Java <br> <br>
-This is completely opensource.<br> Anybody can contribute! <br> <br>
+This is completely opensource.<br> Anybody can contribute! <br>
+List of our code manuals can be found here ---> http://www.geekresearchlab.net/geek.html
+<br> <br>
 Here in UNIX sockets repository, <br>
 Pre-requistes:- <br>
 --- Basic coding skills in C <br>
