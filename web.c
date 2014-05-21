@@ -24,7 +24,16 @@ multiple connections for the references found in the data from that first connec
 So, Without accomplishing first process, the second process can't be done.
 
 For optimization of sequences, the client can start parsing the data that is returned for 1st connection before it does completion.
-
+Since we are into multiple non-blocking connects at the same time, we can't use our "connect_nonb function"...
+Whoa! connect_nonb function?? Actually, there is a daytime client program for non-blocking connect. After the program completion, the link will be pasted here.
+..........
+We will be specifying our program as command line arguments where it has maximum number of parallel connections, the server's hostname and each of file names to fetch from the server.
+The command line arguments specify three simultaneous connections,
+--- The server's hostname
+--- The filename for the homepage (the server's root page)
+--- The files which will be referenced to homepage.
+--- Then, a web client that would read the homepage and parse the HTML to obtain these filenames.
+And instead of complicating it with HTML parsing, let's just simply go on specifying the filenames on the command line.
 */
 
 #include "web.h"
