@@ -1,5 +1,11 @@
-#include "meow.h"
-/* Defining file structures */
+#include "meow.h" /* our main header file */
+/* --- Defining file structures ---
+The program reads up to MAXFILES files from the web server.
+We maintain a file structure with information about each file:-
+- It's name (copied from the command line argument)
+- The hostname or IP address of the server to read the file, also socket descriptor being used for the file.
+- Set of flags to specify what we are gonna do with this yummy file (connecting or reading or )
+*/
 #define MAXFILES 20
 #define SERV "80" /* port number or service name */
 struct file
