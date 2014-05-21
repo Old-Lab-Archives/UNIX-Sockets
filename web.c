@@ -15,8 +15,18 @@ How multiple connections are established in parallel?
 Case 1: Three connections done serially.
 Case 2: Three connections done in parallel, maximum of two connections at a time.
 Case 3: Three connections done in parallel, maximum of three connections at a time.
+Yet, another better scenario,
+Complete first connection, followed by mutiple connections in parallel.
+Like...The first connection is done by itself (The wife does cooking by herself.)...
+And thereby followed by,
+multiple connections for the references found in the data from that first connection..
+(followed by husband who can find food in kitchen cooked by wife...)
+So, Without accomplishing first process, the second process can't be done.
+
+For optimization of sequences, the client can start parsing the data that is returned for 1st connection before it does completion.
 
 */
+
 #include "web.h"
 /* our <web.h> file ---> https://github.com/Geek-Research-Lab/UNIX-Sockets/blob/master/web.h */
 int main(int argc, char **argv)
