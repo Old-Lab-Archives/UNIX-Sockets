@@ -10,12 +10,12 @@ Netscape web client:-
 --- The client establishes an HTTP connection with the web server and fetches the homepage.
 --- And also frequently, that page has got several references to other pages.
 --- So, instead of fetching these pages "serially" one at a time, the client can fetch more than 1 at a time using "non-blocking connects".
-/*
+
 How multiple connections are established in parallel?
 Case 1: Three connections done serially.
 Case 2: Three connections done in parallel, maximum of two connections at a time.
 Case 3: Three connections done in parallel, maximum of three connections at a time.
-*/
+
 */
 #include "web.h"
 /* our <web.h> file ---> https://github.com/Geek-Research-Lab/UNIX-Sockets/blob/master/web.h */
