@@ -1,4 +1,4 @@
-/* Web */
+/* Web kinda thingy with sockets mix */
 /* Let's do some theory first... */
 /* What is done here may not be fully correct! If found anything wrong, then simply contribute. (^_^) */
 /*
@@ -35,7 +35,6 @@ The command line arguments specify three simultaneous connections,
 --- Then, a web client that would read the homepage and parse the HTML to obtain these filenames.
 And instead of complicating it with HTML parsing, let's just simply go on specifying the filenames on the command line.
 */
-
 #include "web.h"
 /* our <web.h> file ---> https://github.com/Geek-Research-Lab/UNIX-Sockets/blob/master/web.h */
 int main(int argc, char **argv)
@@ -46,7 +45,9 @@ int main(int argc, char **argv)
 	if(argc < 5)
 		err_quit("web <#conns> <hostname> <homepage> <file1> ... ");
 	maxnconn = atoi(argv[1]);
-	/* Processing command line arguments */
+	/* Processing command line arguments
+	The file structures are filled in with the relevant information from the command line arguments.
+	*/
 	nfiles = min(argc - 4, MAXFILES);
 	for(i=0;i<nfiles;i++)
 	{
@@ -55,22 +56,36 @@ int main(int argc, char **argv)
 		file[i].f_flags=0;
 	}
 	printf("nfiles = %d \n", nfiles);
-	/* reading homepage */
+	/* reading homepage
+	The home_page function which creates a TCP connection where it sends a command to the server.
+	Like... Let's take client-server computing concept..
+	Client request from the server and the server responds to the request sent by the client.
+	Just like that here... The first connection is done by itself before we start establishing multiple connections in parallel.
+	*/
 	home_page(argv[2], argv[3]);
-	/* Initializing globals */
+	/* Initializing globals
+	There are two descriptor sets ---> One for reading (rset) and one for writing (wset), where they are initialized.
+	maxfd---> Maximum File Descriptor, which is used for 'select' operation, where we initialize to -1 since descriptor is non-negative.
+	nlefttoread---> Number of Files remaining to be read. And when this function 'nlefttoread' reaches 0, we are done.
+	nlefttoconn---> Number of files that still fucking need a TCP connection. It's also the number of connections that are currently open which can never exceed the 1st command line argument.
+	*/
 	FD_ZERO(&rset);
 	FD_ZERO(&wset);
 	maxfd = -1;
 	nlefttoread = nlefttoconn = nfiles;
 	nconn = 0;
-
+	/* Homepage function */
 	void home_page(const char *host, const char *fname) /* function prototype */
 	{
 		int fd, n;
 		char line[MAXLINE];
-		/* Establishing connection with server */
+		/* Establishing connection with server
+		Our tcp_connect establishes a connection with the server.
+		*/
 		fd = tcp_connect(host, SERV); /* blocking connect() */
-		/* Sending HTTP command to server, reading reply */
+		/* Sending HTTP command to server, reading reply
+		HTTP 'GET' command is issued for the homepage. The reply is read & then, connection is closed.
+		*/
 		n = snprintf(line, sizeof(line), GET_CMD, fname);
 		writen(fd, line, n);
 		for(; ;)
@@ -87,7 +102,11 @@ int main(int argc, char **argv)
 	{
 		int fd, flags, n;
 		struct addrinfo *ai;
-		/* Creating socket and setting to non-blocking*/
+		/* Creating socket and setting to non-blocking
+		We will be calling our host_serv function to look up & convert the hostname and service name where pointer is returned to array of addrinfo structures.
+		Only 1st structure is used.
+		A TCP socket is created & the socket is set to non-blocking.
+		*/
 		ai = host_serv(fptr->f_host, SERV, 0, SOCK_STREAM);
 		fd = Socket(ai->ai_family, ai->ai_socktype, ai->ai_protocol);
 		fptr->f_fd = fd;
@@ -95,7 +114,11 @@ int main(int argc, char **argv)
 		/* Set socket non-blocking */
 		flags = Fcntl(fd, F_GETFL, 0);
 		Fcntl(fd, F_SETFL, flags | O_NONBLOCK);
-		/* Initiate non-blocking connect to the server */
+		/* Initiate non-blocking connect to the server
+		The non-blocking connect is initiated & file's flag is set to F_CONNECTING.
+		read set (rset) and write set (wset) are turned on. { socket descriptors }
+		Then, maxfd is updated.
+		*/
 		if((n = connect(fd, ai->ai_addr, ai->ai_addrlen)) < 0)
 		{
 			if(errno!=EINPROGRESS)
@@ -115,7 +138,9 @@ int main(int argc, char **argv)
 	{
 		int n;
 		char line[MAXLINE];
-		/* Building command and sending it */
+		/* Building command and sending it 
+		The command is built and written to the socket.
+		*/
 		n = snprintf(line, sizeof(line), GET_CMD, fptr->f_name);
 		writen(fptr->f_fd, line, n);
 		printf("Done with %d bytes for %s \n", n, fptr->f_name);
