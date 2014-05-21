@@ -1,4 +1,24 @@
+/* Web */
+/* Let's do some theory first... */
+/* What is done here may not be fully correct! If found anything wrong, then simply contribute. (^_^) */
+/*
+The web client using Non-blocking connect concept in UNIX.
+Real-world example:- Netscape Web Client.
+*/
+/*
+Netscape web client:-
+--- The client establishes an HTTP connection with the web server and fetches the homepage.
+--- And also frequently, that page has got several references to other pages.
+--- So, instead of fetching these pages "serially" one at a time, the client can fetch more than 1 at a time using "non-blocking connects".
+/*
+How multiple connections are established in parallel?
+Step 1: Three connections done serially.
+Step 2: Three connections done in parallel, maximum of two connections at a time.
+Step 3: Three connections done in parallel, maximum of three connections at a time.
+*/
+*/
 #include "web.h"
+/* our <web.h> file ---> https://github.com/Geek-Research-Lab/UNIX-Sockets/blob/master/web.h */
 int main(int argc, char **argv)
 {
 	int i, fd, n, maxnconn, flags, error;
