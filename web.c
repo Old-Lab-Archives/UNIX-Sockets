@@ -25,8 +25,7 @@ So, Without accomplishing first process, the second process can't be done.
 
 For optimization of sequences, the client can start parsing the data that is returned for 1st connection before it does completion.
 Since we are into multiple non-blocking connects at the same time, we can't use our "connect_nonb function"...
-Whoa! connect_nonb function?? Actually, there is a daytime client program for non-blocking connect. After the program completion, the link will be pasted here.
-..........
+Whoa! connect_nonb function?? Check our repository --- File name : "nonblock_connect.c"
 We will be specifying our program as command line arguments where it has maximum number of parallel connections, the server's hostname and each of file names to fetch from the server.
 The command line arguments specify three simultaneous connections,
 --- The server's hostname
